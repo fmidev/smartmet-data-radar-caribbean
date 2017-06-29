@@ -1,7 +1,7 @@
 %define smartmetroot /smartmet
 
 Name:           smartmet-data-radar-caribbean
-Version:        17.6.28
+Version:        17.6.29
 Release:        1%{?dist}.fmi
 Summary:        SmartMet Data Radar Caribbean
 Group:          System Environment/Base
@@ -35,7 +35,7 @@ mkdir -p .%{smartmetroot}/logs/data
 mkdir -p .%{smartmetroot}/run/data/radar_caribbean/bin
 
 cat > %{buildroot}%{smartmetroot}/cnf/cron/cron.d/radar_caribbean.cron <<EOF
-*/2 * * * * /smartmet/run/data/radar_caribbean/bin/get_radar_composite.sh &> /smartmet/logs/data/radar_caribbean.log
+*/2 * * * * /smartmet/run/data/radar_caribbean/bin/get_radar_caribbean.sh &> /smartmet/logs/data/radar_caribbean.log
 EOF
 
 cat > %{buildroot}%{smartmetroot}/cnf/cron/cron.hourly/clean_data_radar_caribbean <<EOF
