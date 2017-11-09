@@ -1,7 +1,7 @@
 %define smartmetroot /smartmet
 
 Name:           smartmet-data-radar-caribbean
-Version:        17.6.29
+Version:        17.11.9
 Release:        1%{?dist}.fmi
 Summary:        SmartMet Data Radar Caribbean
 Group:          System Environment/Base
@@ -10,8 +10,8 @@ URL:            https://github.com/fmidev/smartmet-data-radar-caribbean
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires:       smartmet-qdtools
-Requires:       bzip2
+%{?el6:Requires: smartmet-qdconversion}
+%{?el7:Requires: smartmet-qdtools}
 Requires:       wget
 
 %description
@@ -58,5 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %{smartmetroot}/*
 
 %changelog
+* Thu Nov 9 2017 Mikko Rauhala <mikko.rauhala@fmi.fi> 17.11.9-1.el7.fmi
+- Updated requirements
 * Wed Jun 28 2017 Mikko Rauhala <mikko.rauhala@fmi.fi> 17.6.28-1.el7.fmi
 - Initial Version
