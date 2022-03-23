@@ -1,7 +1,7 @@
 %define smartmetroot /smartmet
 
 Name:           smartmet-data-radar-caribbean
-Version:        17.11.9
+Version:        22.3.22
 Release:        1%{?dist}.fmi
 Summary:        SmartMet Data Radar Caribbean
 Group:          System Environment/Base
