@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# Finnish Meteorological Institute / Mikko Rauhala (2015-2016)
+# Finnish Meteorological Institute / Mikko Rauhala (2015-2022)
 #
 # SmartMet Data Ingestion Module for SYNOP Observations for RA IV
 #
 
-URL=http://barbadosweather.org/Radars/Caribbean/DBZ/
+URL=https://barbadosweather.org/Radars/Caribbean/DBZ/
 
 if [ -d /smartmet ]; then
     BASE=/smartmet
@@ -21,16 +21,13 @@ mkdir -p $TMP
 mkdir -p $OUT
 
 echo "URL: $URL"
-echo "OUT: $OUT" 
-echo "TMP: $TMP" 
+echo "OUT: $OUT"
+echo "TMP: $TMP"
 echo "TMP File: $TMPFILE"
 
-echo "Fetching file list..."
-FILES=$(wget -nv -O - $URL | grep -oP 'href="\K[^"]+_radar_caribbean_dbz.png(?=")')
-echo "done";
-
-for file in $FILES
+for i in 0 15 30 45
 do
+    file=$(date +%Y%m%d%H%M -d @$(( $(date -u +%s -d "$i minutes ago") / (15 * 60) * (15 * 60) )))_radar_caribbean_dbz.png
     echo -n $file
     if [ -s $OUT/$file ]; then
       	echo " cached"
@@ -38,7 +35,8 @@ do
 	echo "$URL$file" >> $TMPFILE;
 	echo " download"
     fi
-done 
+done
+
 if [ -s $TMPFILE ]; then
     cat $TMPFILE
     echo "Downloading files...";
@@ -46,7 +44,3 @@ if [ -s $TMPFILE ]; then
     echo "done"
     rm -f $TMPFILE
 fi
-
-
-
-
